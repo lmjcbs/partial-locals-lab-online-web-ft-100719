@@ -1,0 +1,13 @@
+<%= form_tag students_path, method: :get do %>
+  <%= label_tag(:q, "Search for:") %>
+  <%= search_field (:query), params[:query] %>
+  <%= submit_tag "Search", name: nil %>
+<% end %>
+
+<% if @students.empty? %>
+  <p>Sorry, there are no matches for <%= params[:query] %></p>
+<% else %>
+  <% @students.each do |student| %>
+    <%= render partial: 'student', locals: {student: student} %>
+  <% end %>
+<% end %>
